@@ -1,0 +1,48 @@
+<%- include('partials/header', { title: 'Login' }) %>
+
+<section class="card login-card">
+  <p class="eyebrow">Server-provided account</p>
+  <h1>Login</h1>
+  <p class="muted">
+    This demo has no registration page. Sign in with one of the fixed accounts
+    supplied by the server.
+  </p>
+
+  <%- include('partials/errors') %>
+
+  <form method="post" action="/login" class="form">
+    <input type="hidden" name="next" value="<%= locals.next || '/books' %>">
+
+    <label>
+      Username
+      <input
+        type="text"
+        name="username"
+        value="<%= locals.username || '' %>"
+        autocomplete="username"
+        required
+        autofocus
+      >
+    </label>
+
+    <label>
+      Password
+      <input
+        type="password"
+        name="password"
+        autocomplete="current-password"
+        required
+      >
+    </label>
+
+    <button type="submit" class="button">Login</button>
+  </form>
+
+  <div class="demo-box">
+    <strong>Test accounts</strong>
+    <p><code>student01</code> / <code>demo123</code></p>
+    <p><code>student02</code> / <code>demo123</code></p>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

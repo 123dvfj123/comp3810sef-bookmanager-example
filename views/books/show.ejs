@@ -1,0 +1,46 @@
+<%- include('../partials/header', { title: book.title }) %>
+
+<p class="breadcrumb"><a href="/books">Books</a> / <%= book.title %></p>
+
+<section class="card detail-card">
+  <div class="detail-heading">
+    <div>
+      <p class="eyebrow"><%= book.category %></p>
+      <h1><%= book.title %></h1>
+      <p class="muted">by <%= book.author %></p>
+    </div>
+    <span class="badge <%= book.available ? 'badge-yes' : 'badge-no' %>">
+      <%= book.available ? 'Available' : 'On loan' %>
+    </span>
+  </div>
+
+  <dl class="details">
+    <div>
+      <dt>Publication year</dt>
+      <dd><%= book.year %></dd>
+    </div>
+    <div>
+      <dt>Category</dt>
+      <dd><%= book.category %></dd>
+    </div>
+    <div>
+      <dt>Added</dt>
+      <dd><%= new Date(book.createdAt).toLocaleString() %></dd>
+    </div>
+  </dl>
+
+  <div class="form-actions">
+    <a class="button" href="/books/<%= book.id %>/edit">Edit</a>
+    <a class="button button-secondary" href="/books">Back to list</a>
+    <form
+      method="post"
+      action="/books/<%= book.id %>/delete"
+      class="inline-form"
+      onsubmit="return confirm('Delete this book?');"
+    >
+      <button type="submit" class="button button-danger">Delete</button>
+    </form>
+  </div>
+</section>
+
+<%- include('../partials/footer') %>

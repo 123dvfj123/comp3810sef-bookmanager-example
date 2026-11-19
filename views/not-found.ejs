@@ -1,0 +1,10 @@
+<%- include('partials/header', { title: 'Page not found' }) %>
+
+<section class="card narrow-card">
+  <p class="eyebrow">404</p>
+  <h1>Page not found</h1>
+  <p><%= locals.message || 'The page you requested does not exist.' %></p>
+  <a class="button" href="/books">Back to books</a>
+</section>
+
+<%- include('partials/footer') %>

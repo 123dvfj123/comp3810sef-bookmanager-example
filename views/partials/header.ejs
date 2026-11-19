@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= locals.title || 'Book Manager' %> | Book Manager</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/books">Book Manager</a>
+      <nav class="nav">
+        <% if (locals.currentUser) { %>
+          <span class="user-label">
+            <%= locals.currentUser.displayName %>
+            (<%= locals.currentUser.username %>)
+          </span>
+          <a href="/books">Books</a>
+          <a href="/books/new">Add book</a>
+          <form method="post" action="/logout" class="inline-form">
+            <button type="submit" class="link-button">Logout</button>
+          </form>
+        <% } else { %>
+          <a href="/login">Login</a>
+        <% } %>
+      </nav>
+    </header>
+    <main class="container">

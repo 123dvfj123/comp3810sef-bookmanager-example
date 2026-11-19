@@ -1,0 +1,60 @@
+<% const book = locals.book; %>
+<% const currentCategory = book.category || ''; %>
+
+<form method="post" action="<%= locals.formAction %>" class="form">
+  <label>
+    Title
+    <input type="text" name="title" value="<%= book.title || '' %>" required>
+  </label>
+
+  <label>
+    Author
+    <input type="text" name="author" value="<%= book.author || '' %>" required>
+  </label>
+
+  <div class="form-row">
+    <label>
+      Year
+      <input
+        type="number"
+        name="year"
+        value="<%= book.year || '' %>"
+        min="1000"
+        max="2100"
+        required
+      >
+    </label>
+
+    <label>
+      Category
+      <select name="category" required>
+        <option value="" disabled <%= currentCategory ? '' : 'selected' %>>
+          Choose a category
+        </option>
+        <% locals.categories.forEach((category) => { %>
+          <option
+            value="<%= category %>"
+            <%= currentCategory === category ? 'selected' : '' %>
+          >
+            <%= category %>
+          </option>
+        <% }); %>
+      </select>
+    </label>
+  </div>
+
+  <label class="checkbox-row">
+    <input
+      type="checkbox"
+      name="available"
+      value="on"
+      <%= book.available !== false ? 'checked' : '' %>
+    >
+    Available for borrowing
+  </label>
+
+  <div class="form-actions">
+    <button type="submit" class="button"><%= locals.submitLabel %></button>
+    <a class="button button-secondary" href="/books">Cancel</a>
+  </div>
+</form>

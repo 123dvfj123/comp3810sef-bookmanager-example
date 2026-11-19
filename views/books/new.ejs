@@ -1,0 +1,11 @@
+<%- include('../partials/header', { title: 'Add book' }) %>
+
+<section class="card narrow-card">
+  <p class="eyebrow">Create</p>
+  <h1>Add a book</h1>
+
+  <%- include('../partials/errors') %>
+  <%- include('_form', { formAction: '/books', submitLabel: 'Create book' }) %>
+</section>
+
+<%- include('../partials/footer') %>

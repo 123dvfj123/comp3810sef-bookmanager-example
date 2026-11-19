@@ -1,0 +1,11 @@
+<% const errorList = Array.isArray(locals.errors) ? locals.errors : []; %>
+<% if (errorList.length > 0) { %>
+  <div class="alert alert-error" role="alert">
+    <strong>Please fix the following:</strong>
+    <ul>
+      <% errorList.forEach((message) => { %>
+        <li><%= message %></li>
+      <% }); %>
+    </ul>
+  </div>
+<% } %>

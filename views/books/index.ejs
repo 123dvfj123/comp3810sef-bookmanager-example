@@ -1,0 +1,62 @@
+<%- include('../partials/header', { title: 'Books' }) %>
+
+<section class="page-heading">
+  <div>
+    <p class="eyebrow">MVC web pages</p>
+    <h1>Books</h1>
+    <p class="muted">Signed in as <%= currentUser.displayName %>.</p>
+  </div>
+  <a class="button" href="/books/new">Add book</a>
+</section>
+
+<% if (books.length === 0) { %>
+  <section class="card empty-state">
+    <h2>No books yet</h2>
+    <p>Create the first record, or run <code>npm run seed</code>.</p>
+  </section>
+<% } else { %>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Year</th>
+          <th>Category</th>
+          <th>Status</th>
+          <th class="actions-column">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% books.forEach((book) => { %>
+          <tr>
+            <td>
+              <a class="title-link" href="/books/<%= book.id %>"><%= book.title %></a>
+            </td>
+            <td><%= book.author %></td>
+            <td><%= book.year %></td>
+            <td><%= book.category %></td>
+            <td>
+              <span class="badge <%= book.available ? 'badge-yes' : 'badge-no' %>">
+                <%= book.available ? 'Available' : 'On loan' %>
+              </span>
+            </td>
+            <td class="actions">
+              <a class="text-link" href="/books/<%= book.id %>/edit">Edit</a>
+              <form
+                method="post"
+                action="/books/<%= book.id %>/delete"
+                class="inline-form"
+                onsubmit="return confirm('Delete this book?');"
+              >
+                <button type="submit" class="text-link danger">Delete</button>
+              </form>
+            </td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  </div>
+<% } %>
+
+<%- include('../partials/footer') %>
