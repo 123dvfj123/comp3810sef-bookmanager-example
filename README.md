@@ -205,7 +205,7 @@ Express 4 不会自动捕获 async 函数中抛出的 Promise rejection，所以
 检查 `req.session.user`：
 
 - 有值：`next()`，允许进入受保护页面。
-- 没有值：重定向到 `/login?next=原地址`，登录后再回来。
+- 没有值：重定向到 `/login`。
 
 ### `middleware/error-handler.js`
 
@@ -227,7 +227,7 @@ Express 4 不会自动捕获 async 函数中抛出的 Promise rejection，所以
 - `showLogin`：已登录用户直接跳 `/books`，否则显示登录表单。
 - `login`：从 `req.body` 取用户名和密码，调用 `findUser()`。
 - 登录成功只把 `username` 和 `displayName` 放进 session，不保存密码。
-- `safeNext()` 防止开放重定向，只允许站内以 `/` 开头的路径。
+- 登录成功后固定重定向到 `/books`。
 - `logout`：把 `req.session` 设为 `null`，`cookie-session` 会清除浏览器 Cookie。
 
 ### `controllers/bookController.js`：页面 CRUD 控制器
@@ -294,7 +294,7 @@ DELETE /books/:id
 
 ### `views/login.ejs`
 
-- `POST /login` 表单包含用户名、密码和隐藏的 `next` 字段。
+- `POST /login` 表单包含用户名和密码。
 - 登录失败时 `username` 会回填，`errors` 会显示在表单上方。
 - 页面上明确写出测试账号，并说明没有注册页面。
 
@@ -493,8 +493,7 @@ curl -i -X POST http://localhost:8099/api/books \
 ```bash
 curl -i -c cookies.txt -X POST http://localhost:8099/login \
   -d "username=student01" \
-  -d "password=demo123" \
-  -d "next=/books"
+  -d "password=demo123"
 
 curl -i -b cookies.txt http://localhost:8099/books
 ```

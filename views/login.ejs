@@ -11,8 +11,6 @@
   <%- include('partials/errors') %>
 
   <form method="post" action="/login" class="form">
-    <input type="hidden" name="next" value="<%= locals.next || '/books' %>">
-
     <label>
       Username
       <input

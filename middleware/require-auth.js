@@ -4,8 +4,7 @@ function requireAuth(req, res, next) {
     return next();
   }
 
-  const nextUrl = encodeURIComponent(req.originalUrl);
-  return res.redirect(`/login?next=${nextUrl}`);
+  return res.redirect('/login');
 }
 
 module.exports = requireAuth;
